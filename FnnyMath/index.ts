@@ -1,22 +1,20 @@
 /**
- * The `Examine` class is responsible for generating and managing math exercises
- * for comparison operations. It keeps track of the number of correct and incorrect
- * answers and displays the results dynamically on a web page.
+ * The `Examine` class provides functionality to generate and evaluate simple math exercises.
+ * It keeps track of the number of correct and incorrect answers and displays the results.
  * 
  * @class
  * @property {number} count - The total number of exercises generated.
  * @property {number} goodJob - The number of correct answers.
  * @property {number} badAnswer - The number of incorrect answers.
  * 
- * @method showResults - Updates the HTML elements with the current count of correct and incorrect answers.
- * @method compare - Compares two numbers and returns a string representing the comparison result ('>', '<', '=').
- * @method generateExercise - Generates a new exercise and appends it to the HTML element with id 'exercices'.
+ * @method static showResults - Updates the HTML elements with IDs 'goodJob' and 'badAnswer' to show the current count of correct and incorrect answers.
+ * @method static compare - Compares two numbers and returns a string indicating their relationship ('>', '<', '=').
  * 
- * @constructor
- * @property {string} left - A randomly generated number as a string for the left operand.
- * @property {string} right - A randomly generated number as a string for the right operand.
+ * @constructor - Initializes a new exercise with two random numbers between 0 and 10.
+ * @property {string} left - The left operand of the exercise.
+ * @property {string} right - The right operand of the exercise.
  * 
- * @function res - Resets the exercises, clears the results, and generates a new set of exercises.
+ * @method generateExercise - Generates a new exercise and appends it to the HTML element with ID 'exercices'. It also creates input fields for user interaction and a submit button to evaluate the answer.
  */
 class Examine {
     static count: number = 0;
@@ -58,13 +56,13 @@ class Examine {
     }
     generateExercise(): void {
 
-        let addTag: HTMLElement | null = document.getElementById('exercices');
+        let addTag: HTMLElement | null = document.getElementById('exercises');
 
         if (!addTag) {
             return;
         }
 
-        let succ = <HTMLAudioElement>document.getElementById('succ');
+        let successAudio = <HTMLAudioElement>document.getElementById('success');
         let wrong = <HTMLAudioElement>document.getElementById('wrong');
 
 
@@ -92,10 +90,10 @@ class Examine {
         addTag.appendChild(text);
         addTag.appendChild(labelRight);
 
-        let scase: number = parseInt((Math.random() * 3).toFixed(0));
-        console.log(scase);
+        let randomCase: number = parseInt((Math.random() * 3).toFixed(0));
+        console.log(randomCase);
 
-        switch (scase) {
+        switch (randomCase) {
             case 0: {
                 //statements; 
                 text.disabled=false;
@@ -130,7 +128,7 @@ class Examine {
         submitButton.setAttribute('value', 'Submit');
         submitButton.onclick = function () {
             if (Examine.compare(parseInt(labelLeft.value), parseInt(labelRight.value)) === text.value) {
-                succ.play();
+                successAudio.play();
                 labelLeft.setAttribute('disabled', '');
                 labelRight.setAttribute('disabled', '');
                 text.setAttribute('disabled', '');
@@ -152,8 +150,8 @@ class Examine {
 
 }
 
-function res(): void {
-    let addTag = document.getElementById('exercices');
+window.onload = function res(): void {
+    let addTag = document.getElementById('exercises');
     if (!addTag) {
         return;
     }
