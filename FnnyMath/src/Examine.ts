@@ -286,4 +286,3 @@ window.onload = function res(): void {
 }
 
 export default Examine;
-

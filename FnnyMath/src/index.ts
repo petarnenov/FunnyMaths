@@ -2,7 +2,7 @@
 import Examine from './Examine';
 
 function res(): void {
-    let addTag = document.getElementById('exercices');
+    let addTag = document.getElementById('exercises');
     if (!addTag) {
         return;
     }
