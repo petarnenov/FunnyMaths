@@ -17,6 +17,7 @@ class Exrcice {
     left: string;
     right: string;
 
+    //constructor fn
     constructor() {
         this.left = (Math.random() * 10).toFixed(0);
         this.right = (Math.random() * 10).toFixed(0);
